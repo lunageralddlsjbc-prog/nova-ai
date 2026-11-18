@@ -1,8 +1,12 @@
 package com.nova.ai
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -14,7 +18,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            // Force Dark Theme like Qwen
             val darkColorScheme = darkColorScheme(
                 primary = Color(0xFF8B5CF6),
                 background = Color(0xFF0F0F13),
@@ -37,12 +40,16 @@ fun NovaApp() {
             title = { Text("Nova AI", color = Color.White) }, 
             actions = { 
                 IconButton(onClick = { showSettings = !showSettings }) { 
-                    Icon(androidx.compose.material.icons.Icons.Default.Settings, "Settings", tint = Color.White) 
+                    Icon(Icons.Default.Settings, "Settings", tint = Color.White) 
                 } 
             },
             colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFF0F0F13))
         ) 
     }) { padding ->
-        if (showSettings) SettingsScreen(modifier = Modifier.padding(padding), onBack = { showSettings = false }) else ChatScreen(modifier = Modifier.padding(padding))
+        if (showSettings) {
+            SettingsScreen(modifier = Modifier.padding(padding), onBack = { showSettings = false })
+        } else {
+            ChatScreen(modifier = Modifier.padding(padding))
+        }
     }
 }
