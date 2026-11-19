@@ -30,7 +30,7 @@ fun ChatScreen(modifier: Modifier = Modifier) {
     val listState = rememberLazyListState()
     val db = remember { AppDatabase.getDatabase(context) }
     val settingsManager = remember { SettingsManager(context) }
-    val llmService = remember { LLMService(context) }
+    val llmService = LLMService
 
     var messages by remember { mutableStateOf<List<ChatMessage>>(emptyList()) }
     var inputText by remember { mutableStateOf("") }
